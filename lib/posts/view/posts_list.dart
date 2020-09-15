@@ -9,21 +9,21 @@ class PostsList extends StatefulWidget {
 
 class _PostsListState extends State<PostsList> {
   final _scrollController = ScrollController();
-  PostBloc _postBloc;
+  CoubsBloc _postBloc;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    _postBloc = context.bloc<PostBloc>();
+    _postBloc = context.bloc<CoubsBloc>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PostBloc, PostState>(
+    return BlocConsumer<CoubsBloc, CoubsState>(
       listener: (context, state) {
         if (!state.hasReachedMax && _isBottom) {
-          _postBloc.add(PostFetched());
+          _postBloc.add(CoubsFetched());
         }
       },
       builder: (context, state) {
@@ -31,18 +31,18 @@ class _PostsListState extends State<PostsList> {
           case PostStatus.failure:
             return const Center(child: Text('failed to fetch posts'));
           case PostStatus.success:
-            if (state.posts.isEmpty) {
+            if (state.coubs.isEmpty) {
               return const Center(child: Text('no posts'));
             }
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return index >= state.posts.length
+                return index >= state.coubs.length
                     ? BottomLoader()
-                    : PostListItem(post: state.posts[index]);
+                    : PostListItem(post: state.coubs[index]);
               },
               itemCount: state.hasReachedMax
-                  ? state.posts.length
-                  : state.posts.length + 1,
+                  ? state.coubs.length
+                  : state.coubs.length + 1,
               controller: _scrollController,
             );
           default:
@@ -59,7 +59,7 @@ class _PostsListState extends State<PostsList> {
   }
 
   void _onScroll() {
-    if (_isBottom) _postBloc.add(PostFetched());
+    if (_isBottom) _postBloc.add(CoubsFetched());
   }
 
   bool get _isBottom {

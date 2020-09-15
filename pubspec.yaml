@@ -9,8 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc:
-    path: ../../packages/flutter_bloc
+  flutter_bloc: ^6.0.5
   http: ^0.12.0
   equatable: ^1.2.3
   rxdart: ^0.24.0
@@ -19,6 +18,6 @@ dependencies:
   json_annotation: ^2.2.0
   build_runner: ^1.0.0
   json_serializable: ^2.0.0
-
+  better_player: ^0.0.13
 flutter:
   uses-material-design: true

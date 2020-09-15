@@ -9,7 +9,7 @@ class PostsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Posts')),
       body: BlocProvider(
-        create: (_) => PostBloc(httpClient: http.Client())..add(PostFetched()),
+        create: (_) => CoubsBloc(httpClient: http.Client())..add(CoubsFetched()),
         child: PostsList(),
       ),
     );

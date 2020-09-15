@@ -3,23 +3,24 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_infinite_list/models/coubs.dart';
 import 'package:flutter_infinite_list/posts/posts.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-part 'post_event.dart';
-part 'post_state.dart';
+part 'coubs_event.dart';
+part 'coubs_state.dart';
 
-class PostBloc extends Bloc<PostEvent, PostState> {
-  PostBloc({@required this.httpClient}) : super(const PostState());
+class CoubsBloc extends Bloc<CoubsEvent, CoubsState> {
+  CoubsBloc({@required this.httpClient}) : super(const CoubsState());
 
   final http.Client httpClient;
 
   @override
-  Stream<Transition<PostEvent, PostState>> transformEvents(
-    Stream<PostEvent> events,
-    TransitionFunction<PostEvent, PostState> transitionFn,
+  Stream<Transition<CoubsEvent, CoubsState>> transformEvents(
+    Stream<CoubsEvent> events,
+    TransitionFunction<CoubsEvent, CoubsState> transitionFn,
   ) {
     return super.transformEvents(
       events.debounceTime(const Duration(milliseconds: 500)),
@@ -28,29 +29,29 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   @override
-  Stream<PostState> mapEventToState(PostEvent event) async* {
-    if (event is PostFetched) {
+  Stream<CoubsState> mapEventToState(CoubsEvent event) async* {
+    if (event is CoubsFetched) {
       yield await _mapPostFetchedToState(state);
     }
   }
 
-  Future<PostState> _mapPostFetchedToState(PostState state) async {
+  Future<CoubsState> _mapPostFetchedToState(CoubsState state) async {
     if (state.hasReachedMax) return state;
     try {
-      if (state.status == PostStatus.initial) {
+      if (state.status == CoubsStatus.initial) {
         final posts = await _fetchPosts(0, 20);
         return state.copyWith(
-          status: PostStatus.success,
+          status: CoubsStatus.success,
           posts: posts,
           hasReachedMax: false,
         );
       }
-      final posts = await _fetchPosts(state.posts.length, 20);
+      final posts = await _fetchPosts(state.coubs.length, 20);
       return posts.isEmpty
           ? state.copyWith(hasReachedMax: true)
           : state.copyWith(
               status: PostStatus.success,
-              posts: List.of(state.posts)..addAll(posts),
+              posts: List.of(state.coubs)..addAll(posts),
               hasReachedMax: false,
             );
     } on Exception {
