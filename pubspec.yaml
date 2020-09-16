@@ -19,5 +19,6 @@ dependencies:
   build_runner: ^1.0.0
   json_serializable: ^2.0.0
   better_player: ^0.0.13
+  audioplayers: ^0.16.1
 flutter:
   uses-material-design: true

@@ -52,11 +52,7 @@ class CoubPaginatorState extends State<CoubPaginator> {
 
   Widget listItemBuilder(dynamic value, int index) {
     var coub = value as Coubs;
-    return Container(height: 500, child: CoubListItem(coub: coub));
-    // return ListTile(
-    //   leading: Text(index.toString()),
-    //   title: Text(coub.audio_file_url ?? 'null'),
-    // );
+    return Container(child: CoubListItem(coub: coub));
   }
 
   Widget loadingWidgetMaker() {
