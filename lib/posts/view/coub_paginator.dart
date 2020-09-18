@@ -36,6 +36,7 @@ class CoubPaginatorState extends State<CoubPaginator> {
         emptyListWidgetBuilder: emptyListWidgetMaker,
         totalItemsGetter: totalPagesGetter,
         scrollPhysics: const ClampingScrollPhysics(),
+        addAutomaticKeepAlives: false,
         pageErrorChecker: (CoubResp pageData) {
           if (pageData == null) return false;
           return pageData.coubs == null;

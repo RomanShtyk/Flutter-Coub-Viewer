@@ -4,16 +4,16 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<audioplayers/AudioplayersPlugin.h>)
-#import <audioplayers/AudioplayersPlugin.h>
-#else
-@import audioplayers;
-#endif
-
 #if __has_include(<better_player/FLTVideoPlayerPlugin.h>)
 #import <better_player/FLTVideoPlayerPlugin.h>
 #else
 @import better_player;
+#endif
+
+#if __has_include(<audioplayers/AudioplayersPlugin.h>)
+#import <audioplayers/AudioplayersPlugin.h>
+#else
+@import audioplayers;
 #endif
 
 #if __has_include(<path_provider/FLTPathProviderPlugin.h>)
@@ -31,8 +31,8 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [AudioplayersPlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioplayersPlugin"]];
   [FLTVideoPlayerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTVideoPlayerPlugin"]];
+  [AudioplayersPlugin registerWithRegistrar:[registry registrarForPlugin:@"AudioplayersPlugin"]];
   [FLTPathProviderPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTPathProviderPlugin"]];
   [WakelockPlugin registerWithRegistrar:[registry registrarForPlugin:@"WakelockPlugin"]];
 }

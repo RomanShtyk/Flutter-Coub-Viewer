@@ -14,11 +14,12 @@ dependencies:
   equatable: ^1.2.3
   rxdart: ^0.24.0
   flutter_paginator: ^0.0.6
-  json_model: ^0.0.2
   json_annotation: ^2.2.0
   build_runner: ^1.0.0
+  build_runner_core: ^4.0.0
   json_serializable: ^2.0.0
-  better_player: ^0.0.13
+  better_player:
+    git: https://github.com/RomanShtyk/betterplayer.git
   audioplayers: ^0.16.1
 flutter:
   uses-material-design: true
